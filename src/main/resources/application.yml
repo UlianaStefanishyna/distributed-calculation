@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gl_db
+    username: gl_db
+    password: global
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+    com:
+      kpi:
+        distributed:
+          calculation: DEBUG
