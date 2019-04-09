@@ -2,7 +2,6 @@ package com.kpi.distributed.calculation.presentation;
 
 import com.kpi.distributed.calculation.model.business.BasicDto;
 import com.kpi.distributed.calculation.model.dto.CalculatedDataDTO;
-import com.kpi.distributed.calculation.model.entity.CalculatedData;
 import com.kpi.distributed.calculation.service.CalculatedDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

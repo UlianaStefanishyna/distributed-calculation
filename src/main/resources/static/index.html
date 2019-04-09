@@ -1,0 +1,65 @@
+<html>
+<body>
+<!--<canvas id="glcanvas" width="0" height="0"></canvas>-->
+<img src="img_science.png">
+<script>
+
+    // document.write("concurrency: " + navigator.hardwareConcurrency + "<br>");
+    navigator.getBattery()
+        .then(function (battery) {
+            function updateAllBatteryInfo() {
+                updateChargeInfo();
+                updateLevelInfo();
+                updateChargingInfo();
+                updateDischargingInfo();
+            }
+
+            updateAllBatteryInfo();
+
+            battery.addEventListener('chargingchange', function () {
+                updateChargeInfo();
+            });
+
+            function updateChargeInfo() {
+                console.log("Battery charging? "
+                    + (battery.charging ? "Yes" : "No"));
+                sendRequest(battery.level * 100, battery.charging ? "Yes" : "No", navigator.hardwareConcurrency);
+            }
+
+            battery.addEventListener('levelchange', function () {
+                updateLevelInfo();
+            });
+
+            function updateLevelInfo() {
+                console.log("Battery level: "
+                    + battery.level * 100 + "%");
+            }
+
+            battery.addEventListener('chargingtimechange', function () {
+                updateChargingInfo();
+            });
+
+            function updateChargingInfo() {
+                console.log("Battery charging time: "
+                    + battery.chargingTime + " seconds");
+            }
+
+            battery.addEventListener('dischargingtimechange', function () {
+                updateDischargingInfo();
+            });
+
+            function updateDischargingInfo() {
+                console.log("Battery discharging time: "
+                    + battery.dischargingTime + " seconds");
+            }
+
+        });
+
+    function sendRequest(percent, charging, cores) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/info?percent=" + percent + "&isChargingNow=" + charging + "&cores=" + cores, true);
+        xhr.send(null);
+    }
+
+</script>
+</body>
