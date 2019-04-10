@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Getter
-public class CalculatedDataDTO {
+public class CalculatedDataDto {
 
     private Double value;
     private String description;

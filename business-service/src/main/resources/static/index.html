@@ -2,6 +2,11 @@
 <body>
 <img src="img_science.png">
 <script>
+
+    console.log("sum of prime numbers up to 20 are :" + primeFactorsTo(20));
+
+    var amount;
+
     navigator.getBattery()
         .then(function (battery) {
             function updateAllBatteryInfo() {
@@ -52,6 +57,33 @@
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/info?percent=" + percent + "&isChargingNow=" + charging + "&cores=" + cores, true);
         xhr.send(null);
+
+        xhr.onreadystatechange = (e) =>
+        {
+            var jsonResponse = JSON.parse(xhr.responseText);
+            var iterationCount = jsonResponse.iterationCount;
+            console.log("iterationCount=" + iterationCount)
+            var sum = primeFactorsTo(iterationCount);
+            var xhr1 = new XMLHttpRequest();
+            xhr1.open("POST", "/info?sum=" + sum, true);
+            xhr1.send(null);
+        }
+    }
+
+    function primeFactorsTo(max) {
+        var store = [], i, j, primes = [];
+        var sum = 0;
+
+        for (i = 2; i <= max; ++i) {
+            if (!store [i]) {
+                // primes.push(i);
+                sum += i;
+                for (j = i << 1; j <= max; j += i) {
+                    store[j] = true;
+                }
+            }
+        }
+        return sum;
     }
 
 </script>
