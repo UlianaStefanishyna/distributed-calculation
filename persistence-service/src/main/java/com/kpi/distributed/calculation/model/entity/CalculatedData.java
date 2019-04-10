@@ -31,7 +31,7 @@ public class CalculatedData {
     @Column(nullable = false)
     private LocalDateTime date = LocalDateTime.now();
 
-    public CalculatedData(Double value, String description){
+    public CalculatedData(Double value, String description) {
         this.value = value;
         this.description = description;
     }
